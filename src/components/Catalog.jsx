@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getProductos } from '../services/api';
 import ProductCard from './ProductCard';
 
-export default function Catalog() {
+export default function Catalog({ addToCart, cart }) {
     const [productos, setProductos] = useState([]);
 
     useEffect(() => {
@@ -16,9 +16,9 @@ export default function Catalog() {
             <h1>Catálogo de Productos</h1>
             <div className="grid-productos">
                 {productos.map((prod) => (
-                    <ProductCard key={prod.id} producto={prod} />
+                    <ProductCard key={prod.id} producto={prod} addToCart={addToCart} cart={cart} />
                 ))}
             </div>
         </div>
     );
-}
+}
