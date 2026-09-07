@@ -19,32 +19,51 @@ class Producto(BaseModel):
 productos_db = [
     Producto(
         id=1,
-        nombre="Esponja(bizcochuelo)",
-        precio_final=11500,
+        nombre="Hamburguesa (Está hecho de banana y avena)",
+        precio_final=9500,
         cuotas_cantidad=3,
-        cuotas_valor=3833.33,
+        cuotas_valor=3166.67,
         garantia_meses=0,
         stock=15
     ),
     Producto(
         id=2,
-        nombre="hamburguesa(postre de banana)",
-        precio_final=9500,
+        nombre="Esponja (Es un bizcochuelo)",
+        precio_final=12500,
         cuotas_cantidad=3,
-        cuotas_valor=3166.67,
+        cuotas_valor=4166.67,
         garantia_meses=0,
-        stock=8
+        stock=15
     ),
     Producto(
         id=3,
-        nombre="tomates(macarrones)",
+        nombre="Huevo (De gelatina)",
+        precio_final=6000,
+        cuotas_cantidad=3,
+        cuotas_valor=2000.0,
+        garantia_meses=0,
+        stock=15
+    ),
+    Producto(
+        id=4,
+        nombre="Vela (Chocolate blanco y negro)",
+        precio_final=9000,
+        cuotas_cantidad=3,
+        cuotas_valor=3000.0,
+        garantia_meses=0,
+        stock=15
+    ),
+    Producto(
+        id=5,
+        nombre="Tomate (Algo parecido al alfajor de maicena)",
         precio_final=11000,
         cuotas_cantidad=3,
         cuotas_valor=3666.67,
         garantia_meses=0,
-        stock=3
+        stock=15
     )
 ]
+
 
 # Paso 3: Endpoint GET /productos
 @app.get("/productos", response_model=list[Producto])
