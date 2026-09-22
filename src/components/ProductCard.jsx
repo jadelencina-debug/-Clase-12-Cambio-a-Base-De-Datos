@@ -1,11 +1,19 @@
+import { getProductImage } from '../utils/productImages';
+
 export default function ProductCard({ producto, addToCart, cart }) {
     const { nombre, precio_final, cuotas_cantidad, cuotas_valor, garantia_meses, stock } = producto;
     const inCart = cart?.find((item) => item.id === producto.id);
     const cantidadEnCarrito = inCart ? inCart.cantidad : 0;
     const sinStock = cantidadEnCarrito >= stock;
+    const imgSrc = getProductImage(producto);
 
     return (
         <div className="card">
+            {imgSrc && (
+                <div className="card-img-wrapper">
+                    <img src={imgSrc} alt={nombre} className="card-img" />
+                </div>
+            )}
             <h3>{nombre}</h3>
             <p className="precio">${precio_final.toLocaleString('es-AR')}</p>
             <p className="cuotas">

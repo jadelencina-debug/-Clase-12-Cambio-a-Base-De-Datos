@@ -1,3 +1,5 @@
+import { getProductImage } from '../utils/productImages';
+
 export default function CartSidebar({ cart, isOpen, onClose, onRemove, totalPrice, onCheckout }) {
     return (
         <>
@@ -18,12 +20,17 @@ export default function CartSidebar({ cart, isOpen, onClose, onRemove, totalPric
                     {cart.length === 0 ? (
                         <p className="cart-empty">Tu carrito está vacío.</p>
                     ) : (
-                        cart.map((item) => (
-                            <div key={item.id} className="cart-item">
-                                <div className="cart-item-info">
-                                    <span className="cart-item-name">{item.nombre}</span>
-                                    <span className="cart-item-qty">x{item.cantidad}</span>
-                                </div>
+                        cart.map((item) => {
+                            const imgSrc = getProductImage(item);
+                            return (
+                                <div key={item.id} className="cart-item">
+                                    {imgSrc && (
+                                        <img src={imgSrc} alt={item.nombre} className="cart-item-thumb" />
+                                    )}
+                                    <div className="cart-item-info">
+                                        <span className="cart-item-name">{item.nombre}</span>
+                                        <span className="cart-item-qty">x{item.cantidad}</span>
+                                    </div>
                                 <div className="cart-item-right">
                                     <span className="cart-item-price">
                                         ${(item.precio_final * item.cantidad).toLocaleString('es-AR')}
@@ -37,7 +44,8 @@ export default function CartSidebar({ cart, isOpen, onClose, onRemove, totalPric
                                     </button>
                                 </div>
                             </div>
-                        ))
+                            );
+                        })
                     )}
                 </div>
 

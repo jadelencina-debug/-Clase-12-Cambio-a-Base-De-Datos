@@ -1,212 +1,394 @@
-/* App.css */
+/* ==========================================================================
+   Tienda Fun & Candy Pop Theme - Vibrant, Playful, Premium CSS
+   ========================================================================== */
+
+/* ===================== ANIMACIONES ===================== */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+  }
+  70% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes rainbowGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseCart {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.6), 0 10px 25px rgba(155, 93, 229, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(255, 0, 127, 0), 0 12px 30px rgba(155, 93, 229, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 127, 0), 0 10px 25px rgba(155, 93, 229, 0.5);
+  }
+}
+
+@keyframes badgeBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25) rotate(-8deg); }
+}
+
+/* ===================== CATÁLOGO Y ENCABEZADO ===================== */
 .catalogo {
-  padding: 2rem 0;
+  padding: 1rem 0 3rem 0;
   text-align: center;
-  animation: fadeIn 0.8s ease-out;
+  animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .catalogo h1 {
-  font-size: 3rem;
-  margin-bottom: 3rem;
-  background: var(--accent-gradient);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(135deg, #ff007f 0%, #ff5e62 30%, #fee440 60%, #00f5d4 100%);
+  background-size: 250% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: -1px;
+  animation: rainbowGlow 6s ease infinite;
+  text-shadow: 0 10px 30px rgba(255, 0, 127, 0.2);
 }
 
+.catalogo h1::after {
+  content: ' ✨🍰🎈';
+  font-size: 0.65em;
+  -webkit-text-fill-color: initial;
+  display: inline-block;
+  vertical-align: middle;
+  animation: floatSoft 3s ease-in-out infinite;
+}
+
+/* ===================== GRID DE PRODUCTOS ===================== */
 .grid-productos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2.2rem;
+  padding: 0.5rem;
 }
 
+/* ===================== TARJETA DE PRODUCTO ===================== */
 .card {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 2rem;
+  background: linear-gradient(160deg, rgba(35, 26, 74, 0.8) 0%, rgba(18, 12, 42, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 2rem 1.8rem;
   text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  box-shadow: var(--shadow);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
   position: relative;
   overflow: hidden;
 }
 
+/* Borde superior colorido con efecto neón */
 .card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: var(--accent-gradient);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  height: 6px;
+  background: var(--grad-candy);
+  opacity: 0.85;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.card:nth-child(2n)::before {
+  background: var(--grad-neon);
+}
+
+.card:nth-child(3n)::before {
+  background: var(--grad-magic);
+}
+
+.card:nth-child(4n)::before {
+  background: var(--grad-lemonade);
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.15);
-  border-color: rgba(255, 107, 107, 0.3);
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(255, 0, 127, 0.45);
+  box-shadow: 
+    0 22px 45px -10px rgba(255, 0, 127, 0.3),
+    0 0 25px rgba(0, 245, 212, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .card:hover::before {
+  height: 8px;
   opacity: 1;
 }
 
+/* Imagen del producto */
+.card-img-wrapper {
+  width: 100%;
+  height: 185px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(14, 9, 32, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.card:hover .card-img {
+  transform: scale(1.06);
+}
+
 .card h3 {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  margin-top: 0.3rem;
+  letter-spacing: -0.3px;
 }
 
+/* Precio destacado */
 .card .precio {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--accent-color);
-}
-
-.card .cuotas {
-  font-size: 0.95rem;
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
+  font-size: 2.1rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, #fee440 0%, #ff5e62 60%, #ff007f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
-  margin-top: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+/* Cuotas estilo píldora candy */
+.card .cuotas {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffe5f4;
+  background: linear-gradient(135deg, rgba(247, 37, 133, 0.2) 0%, rgba(114, 9, 183, 0.25) 100%);
+  border: 1px solid rgba(247, 37, 133, 0.35);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   width: fit-content;
+  box-shadow: 0 4px 12px rgba(247, 37, 133, 0.15);
 }
 
+.card .cuotas::before {
+  content: '💳';
+  font-size: 0.95em;
+}
+
+/* Garantía */
 .card .garantia {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--card-border);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #bfaee3;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+.card .garantia::before {
+  content: '🛡️';
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Info de stock */
+.stock-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stock-info::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
 }
 
 /* ===================== BOTÓN AGREGAR AL CARRITO ===================== */
 .add-to-cart-btn {
   margin-top: auto;
-  padding: 0.75rem 1rem;
-  background: var(--accent-gradient);
+  padding: 0.85rem 1.2rem;
+  background: linear-gradient(135deg, #ff007f 0%, #ff5e62 50%, #ffb300 100%);
+  background-size: 200% auto;
   border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: 0.3px;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 100%;
+  box-shadow: 0 6px 18px -3px rgba(255, 0, 127, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-cart-btn::after {
+  content: '🛒';
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
 }
 
 .add-to-cart-btn:hover:not(:disabled) {
-  opacity: 0.85;
-  transform: scale(1.02);
+  transform: translateY(-2px) scale(1.025);
+  background-position: right center;
+  box-shadow: 0 10px 25px -3px rgba(255, 0, 127, 0.65);
+}
+
+.add-to-cart-btn:hover:not(:disabled)::after {
+  transform: rotate(-12deg) scale(1.2);
+}
+
+.add-to-cart-btn:active:not(:disabled) {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px -2px rgba(255, 0, 127, 0.5);
 }
 
 .add-to-cart-btn--disabled,
 .add-to-cart-btn:disabled {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  color: #6d638a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
   cursor: not-allowed;
+  transform: none !important;
 }
 
-.stock-info {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+.add-to-cart-btn--disabled::after,
+.add-to-cart-btn:disabled::after {
+  content: '✕';
+  opacity: 0.5;
 }
 
-/* ===================== BOTÓN FLOTANTE CARRITO ===================== */
+/* ===================== BOTÓN FLOTANTE CARRITO (FAB) ===================== */
 .cart-fab {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 62px;
-  height: 62px;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background: var(--accent-gradient);
-  border: none;
-  font-size: 1.6rem;
+  background: var(--grad-candy);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  font-size: 1.85rem;
   cursor: pointer;
-  box-shadow: 0 6px 24px rgba(255, 107, 107, 0.4);
+  animation: pulseCart 2.5s infinite;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 100;
 }
 
 .cart-fab:hover {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(-6deg);
+  animation: none;
+  box-shadow: 0 15px 35px rgba(255, 0, 127, 0.7);
 }
 
 .cart-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #fff;
-  color: #ff6b6b;
-  font-size: 0.75rem;
-  font-weight: 800;
+  top: -6px;
+  right: -6px;
+  background: var(--accent-yellow);
+  color: #6a040f;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 900;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: badgeBounce 2s ease infinite;
 }
 
 /* ===================== OVERLAY ===================== */
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0);
+  background: rgba(8, 5, 20, 0);
   pointer-events: none;
-  transition: background 0.3s ease;
+  transition: background 0.35s ease;
   z-index: 200;
+  backdrop-filter: blur(0px);
 }
 
 .cart-overlay--visible {
-  background: rgba(0,0,0,0.5);
+  background: rgba(8, 5, 20, 0.7);
   pointer-events: all;
+  backdrop-filter: blur(8px);
 }
 
-/* ===================== SIDEBAR CARRITO ===================== */
+/* ===================== SIDEBAR DEL CARRITO ===================== */
 .cart-sidebar {
   position: fixed;
   top: 0;
   right: 0;
   height: 100vh;
-  width: 360px;
-  background: rgba(18, 15, 28, 0.97);
-  backdrop-filter: blur(20px);
-  border-left: 1px solid var(--card-border);
+  width: min(400px, 92vw);
+  background: linear-gradient(175deg, rgba(28, 20, 60, 0.97) 0%, rgba(13, 8, 30, 0.98) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-left: 2px solid rgba(255, 0, 127, 0.3);
   display: flex;
   flex-direction: column;
   z-index: 300;
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7);
 }
 
 .cart-sidebar--open {
@@ -217,32 +399,47 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--card-border);
+  padding: 1.8rem 1.6rem;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .cart-header h2 {
-  font-size: 1.2rem;
-  color: #fff;
+  font-size: 1.45rem;
+  font-weight: 800;
+  background: var(--grad-candy);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cart-close-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-soft);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .cart-close-btn:hover {
+  background: var(--accent-pink);
   color: #fff;
+  transform: rotate(90deg) scale(1.1);
+  border-color: transparent;
 }
 
 .cart-items {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -251,164 +448,256 @@
 .cart-empty {
   text-align: center;
   color: var(--text-muted);
-  margin-top: 3rem;
+  margin-top: 4rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
 }
 
+.cart-empty::before {
+  content: '🧁✨';
+  font-size: 3rem;
+  display: block;
+}
+
+/* Elemento del carrito */
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  transition: all 0.25s ease;
+}
+
+.cart-item:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 0, 127, 0.35);
+  transform: translateX(-4px);
+}
+
+.cart-item-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  margin-right: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .cart-item-info {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
 }
 
 .cart-item-name {
-  font-weight: 600;
-  color: #fff;
-  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1rem;
 }
 
 .cart-item-qty {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-yellow);
+  background: rgba(254, 228, 64, 0.15);
+  padding: 0.15rem 0.6rem;
+  border-radius: 8px;
+  width: fit-content;
 }
 
 .cart-item-right {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .cart-item-price {
-  font-weight: 700;
-  color: var(--accent-color);
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
 }
 
 .cart-remove-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 0, 85, 0.12);
+  border: 1px solid rgba(255, 0, 85, 0.25);
+  border-radius: 10px;
+  padding: 0.45rem;
   cursor: pointer;
-  font-size: 1rem;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
-
-.cart-remove-btn:hover {
-  opacity: 1;
-}
-
-/* ===================== FOOTER CARRITO ===================== */
-.cart-footer {
-  padding: 1.5rem;
-  border-top: 1px solid var(--card-border);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.cart-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.1rem;
-  color: #fff;
-}
-
-.cart-total strong {
-  color: var(--accent-color);
-  font-size: 1.3rem;
-}
-
-.cart-checkout-btn {
-  padding: 1rem;
-  background: var(--accent-gradient);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.cart-checkout-btn:hover {
-  opacity: 0.85;
-  transform: scale(1.02);
-}
-
-/* ===================== MODAL PAGO ===================== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  font-size: 1.05rem;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 500;
-  backdrop-filter: blur(4px);
-  animation: fadeIn 0.2s ease;
 }
 
-.modal {
-  background: rgba(18, 15, 28, 0.98);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 2.5rem;
-  width: 90%;
-  max-width: 420px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+.cart-remove-btn:hover {
+  background: var(--accent-pink);
+  transform: scale(1.15) rotate(8deg);
+  border-color: transparent;
+}
+
+/* ===================== FOOTER DEL CARRITO ===================== */
+.cart-footer {
+  padding: 1.6rem;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(18, 12, 42, 0.6);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.cart-total strong {
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, #fee440 0%, #ff5e62 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+.cart-checkout-btn {
+  padding: 1.1rem;
+  background: var(--grad-candy);
+  background-size: 200% auto;
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px -5px rgba(255, 0, 127, 0.6);
+  text-align: center;
+}
+
+.cart-checkout-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background-position: right center;
+  box-shadow: 0 15px 35px -5px rgba(255, 0, 127, 0.8);
+}
+
+/* ===================== MODAL DE PAGO ===================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 5, 20, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  backdrop-filter: blur(12px);
+  animation: popIn 0.25s ease-out;
+  padding: 1rem;
+}
+
+.modal {
+  background: linear-gradient(160deg, rgba(35, 26, 75, 0.98) 0%, rgba(18, 12, 45, 0.99) 100%);
+  border: 2px solid rgba(255, 0, 127, 0.35);
+  border-radius: 28px;
+  padding: 2.5rem 2.2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(255, 0, 127, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--grad-candy);
+}
+
 .modal-title {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 800;
   color: #fff;
   text-align: center;
+  background: linear-gradient(135deg, #ffffff 30%, #ffd0eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .modal-subtitle {
   text-align: center;
-  color: var(--text-muted);
-  font-size: 1rem;
+  color: var(--text-soft);
+  font-size: 1.05rem;
 }
 
 .modal-subtitle strong {
-  color: var(--accent-color);
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, #fee440, #ff5e62);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-left: 0.3rem;
 }
 
 .payment-options {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .payment-btn {
-  padding: 1rem;
+  padding: 1.1rem 1.4rem;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 .payment-btn:hover {
-  background: rgba(255, 107, 107, 0.12);
-  border-color: rgba(255, 107, 107, 0.4);
-  transform: translateX(4px);
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.2) 0%, rgba(155, 93, 229, 0.25) 100%);
+  border-color: var(--accent-pink);
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 0 8px 20px -5px rgba(255, 0, 127, 0.4);
+}
+
+.payment-btn:active {
+  transform: scale(0.98);
 }
 
 .modal-cancel-btn {
@@ -417,96 +706,114 @@
   color: var(--text-muted);
   text-align: center;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
   transition: color 0.2s;
 }
 
 .modal-cancel-btn:hover {
-  color: #fff;
+  color: #ff5e62;
+  text-decoration: underline;
 }
 
-/* ===================== TICKET ===================== */
+/* ===================== TICKET / RECIBO MODERNO ===================== */
 .ticket-modal {
   background: #ffffff;
-  color: #111;
-  border-radius: 16px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  color: #1e1035;
+  border-radius: 26px;
+  padding: 2.2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(0, 245, 212, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 8px solid var(--accent-pink);
 }
 
 .ticket-header {
   text-align: center;
-  border-bottom: 2px dashed #ddd;
-  padding-bottom: 1rem;
+  border-bottom: 2px dashed #e4d7f5;
+  padding-bottom: 1.2rem;
 }
 
 .ticket-logo {
-  font-size: 2.5rem;
-  margin-bottom: 0.3rem;
+  font-size: 3rem;
+  margin-bottom: 0.2rem;
+  animation: floatSoft 3s ease-in-out infinite;
 }
 
 .ticket-header h2 {
-  font-size: 1.3rem;
-  color: #111;
-  margin-bottom: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1c0e36;
+  margin-bottom: 0.3rem;
 }
 
 .ticket-subtitle {
-  color: #666;
-  font-size: 0.9rem;
+  color: #79669e;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .ticket-body {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .ticket-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  background: #fbf9fe;
+  padding: 0.9rem 1.1rem;
+  border-radius: 14px;
 }
 
 .ticket-meta-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
-  color: #444;
+  font-size: 0.9rem;
+  color: #635084;
 }
 
 .ticket-meta-row strong {
-  color: #111;
+  color: #1e1035;
+  font-weight: 700;
 }
 
 .ticket-divider {
   text-align: center;
-  font-size: 0.75rem;
-  color: #999;
-  position: relative;
-  border-top: 1px dashed #ddd;
-  padding-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #8f7cae;
+  border-top: 2px dashed #e4d7f5;
+  padding-top: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 
 .ticket-items {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
 }
 
 .ticket-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 0.95rem;
+  color: #2b1b47;
 }
 
 .ticket-item-name {
@@ -515,69 +822,423 @@
 }
 
 .ticket-item-qty {
-  color: #888;
+  color: #8f7cae;
+  font-weight: 600;
   margin: 0 0.8rem;
+  background: #f0eafc;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
 }
 
 .ticket-item-price {
-  font-weight: 700;
-  color: #111;
+  font-weight: 800;
+  color: #1e1035;
 }
 
 .ticket-total-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 2px solid #111;
-  padding-top: 0.8rem;
-  font-size: 1.1rem;
+  border-top: 2px solid #2b1b47;
+  padding-top: 1rem;
+  font-size: 1.15rem;
+  font-weight: 800;
 }
 
 .ticket-total-row strong {
-  font-size: 1.4rem;
-  color: #ff6b6b;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--accent-pink);
 }
 
 .ticket-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
 }
 
 .ticket-print-btn {
-  padding: 0.8rem;
-  background: #111;
+  padding: 1rem;
+  background: var(--grad-candy);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 20px -4px rgba(255, 0, 127, 0.5);
 }
 
 .ticket-print-btn:hover {
-  opacity: 0.8;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 25px -2px rgba(255, 0, 127, 0.7);
 }
 
 .ticket-close-btn {
   background: none;
   border: none;
-  color: #888;
+  color: #79669e;
   text-align: center;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
   transition: color 0.2s;
 }
 
 .ticket-close-btn:hover {
-  color: #111;
+  color: #1e1035;
 }
 
-/* ===================== PRINT ===================== */
+/* ===================== IMPRESIÓN ===================== */
 @media print {
   body * { visibility: hidden; }
   .ticket-modal, .ticket-modal * { visibility: visible; }
-  .ticket-modal { position: fixed; inset: 0; margin: auto; box-shadow: none; }
+  .ticket-modal { position: fixed; inset: 0; margin: auto; box-shadow: none; border-top: none; }
   .ticket-footer { display: none; }
+}
+
+/* ==========================================================================
+   BOTÓN DE ARREPENTIMIENTO — Ley N° 24.240, Art. 34 / Res. 424/2020
+   ========================================================================== */
+
+@keyframes arrepentimientoSlide {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes arrepentimientoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(234, 88, 12, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+}
+
+/* ── Botón flotante ── */
+.arrepentimiento-fab {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.45);
+  animation: arrepentimientoPulse 2.8s ease-out infinite;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.arrepentimiento-fab:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 10px 28px rgba(234, 88, 12, 0.55);
+}
+
+.arrepentimiento-fab-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.arrepentimiento-fab-label {
+  white-space: nowrap;
+}
+
+/* ── Overlay ── */
+.arrepentimiento-overlay {
+  background: rgba(10, 6, 30, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* ── Modal contenedor ── */
+.arrepentimiento-modal {
+  background: linear-gradient(160deg, #1a0e3a 0%, #0f172a 100%);
+  border: 1px solid rgba(234, 88, 12, 0.35);
+  border-radius: 1.25rem;
+  padding: 2.25rem 2rem;
+  width: min(520px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  color: #f1f5f9;
+  animation: arrepentimientoSlide 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(234, 88, 12, 0.15);
+}
+
+/* ── Header ── */
+.arrepentimiento-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.arrepentimiento-badge {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: rgba(234, 88, 12, 0.18);
+  border: 1px solid rgba(234, 88, 12, 0.4);
+  border-radius: 50px;
+  color: #fb923c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.arrepentimiento-header h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.6rem;
+}
+
+.arrepentimiento-descripcion {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* ── Info de la orden ── */
+.arrepentimiento-orden {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  background: rgba(234, 88, 12, 0.1);
+  border: 1px solid rgba(234, 88, 12, 0.25);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin-bottom: 1.4rem;
+}
+
+.arrepentimiento-orden strong {
+  color: #fb923c;
+}
+
+/* ── Formulario ── */
+.arrepentimiento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.arrepentimiento-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.arrepentimiento-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.arrepentimiento-field input,
+.arrepentimiento-field textarea {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  color: #f1f5f9;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.arrepentimiento-field input:focus,
+.arrepentimiento-field textarea:focus {
+  outline: none;
+  border-color: #f97316;
+  background: rgba(249, 115, 22, 0.06);
+}
+
+/* ── Texto legal ── */
+.arrepentimiento-legal {
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid #f97316;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.85rem 1rem;
+}
+
+.arrepentimiento-legal p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.arrepentimiento-legal strong {
+  color: #fb923c;
+}
+
+/* ── Acciones del formulario ── */
+.arrepentimiento-acciones {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.arrepentimiento-btn-confirmar {
+  flex: 1;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.arrepentimiento-btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45);
+}
+
+.arrepentimiento-btn-cancelar {
+  padding: 0.8rem 1.25rem;
+  background: rgba(255, 255, 255, 0.07);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.arrepentimiento-btn-cancelar:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+}
+
+/* ── Estados (sin compra / confirmado / fuera de plazo) ── */
+.arrepentimiento-estado {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.arrepentimiento-icono {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.arrepentimiento-estado h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+
+.arrepentimiento-estado p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.65;
+  margin: 0 0 0.6rem;
+}
+
+.arrepentimiento-ley-nota {
+  font-size: 0.78rem !important;
+  color: #64748b !important;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem !important;
+}
+
+.arrepentimiento-ley-nota strong {
+  color: #fb923c;
+}
+
+.arrepentimiento-btn-cerrar {
+  margin-top: 1.25rem;
+  padding: 0.7rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.arrepentimiento-btn-cerrar:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .arrepentimiento-fab-label { display: none; }
+  .arrepentimiento-fab { padding: 0.85rem; border-radius: 50%; }
+  .arrepentimiento-fab-icon { font-size: 1.3rem; }
+  .arrepentimiento-acciones { flex-direction: column; }
+}
+
+/* ===================== BOTÓN AUTH / LEY 25.326 ===================== */
+@keyframes authPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7), 0 8px 24px rgba(79, 70, 229, 0.5); }
+  70%  { box-shadow: 0 0 0 12px rgba(124, 58, 237, 0), 0 10px 28px rgba(79, 70, 229, 0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0), 0 8px 24px rgba(79, 70, 229, 0.5); }
+}
+
+.auth-fab {
+  position: fixed;
+  bottom: 5rem;
+  left: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5);
+  animation: authPulse 2.8s ease-in-out infinite;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  white-space: nowrap;
+}
+
+.auth-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.15);
+}
+
+.auth-fab:active {
+  transform: scale(0.97);
+}
+
+.auth-fab-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.auth-fab-label {
+  font-size: 0.83rem;
+}
+
+@media (max-width: 480px) {
+  .auth-fab-label { display: none; }
+  .auth-fab { padding: 0.85rem; border-radius: 50%; left: 1rem; bottom: 5rem; }
 }

@@ -4,12 +4,32 @@ import Catalog from './components/Catalog';
 import CartSidebar from './components/CartSidebar';
 import PaymentModal from './components/PaymentModal';
 import Ticket from './components/Ticket';
+import BotonArrepentimiento from './components/BotonArrepentimiento';
+import ModalAuth from './components/ModalAuth';
+
+function createTicketData(cart, totalPrice, metodoPago) {
+  const now = new Date();
+  const fecha = now.toLocaleDateString('es-AR', {
+    day: '2-digit', month: '2-digit', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+  const numeroOrden = Math.floor(100000 + Math.random() * 900000);
+
+  return {
+    numeroOrden,
+    fecha,
+    metodoPago,
+    items: cart,
+    total: totalPrice,
+  };
+}
 
 function App() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [ticket, setTicket] = useState(null);
+  const [showAuth, setShowAuth] = useState(false);
 
   const addToCart = (producto) => {
     setCart((prev) => {
@@ -35,20 +55,7 @@ function App() {
   };
 
   const handleConfirmPayment = (metodoPago) => {
-    const now = new Date();
-    const fecha = now.toLocaleDateString('es-AR', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
-    const numeroOrden = Math.floor(100000 + Math.random() * 900000);
-
-    setTicket({
-      numeroOrden,
-      fecha,
-      metodoPago,
-      items: cart,
-      total: totalPrice,
-    });
+    setTicket(createTicketData(cart, totalPrice, metodoPago));
     setShowPayment(false);
     setCart([]);
   };
@@ -89,6 +96,22 @@ function App() {
       )}
 
       {ticket && <Ticket ticket={ticket} onClose={handleCloseTicket} />}
+
+      <BotonArrepentimiento ultimaOrden={ticket} />
+
+      {/* Botón flotante — Demo Auth / Ley 25.326 */}
+      <button
+        className="auth-fab"
+        onClick={() => setShowAuth(true)}
+        id="auth-fab-btn"
+        title="Demo: Autenticación y Ley 25.326"
+        aria-label="Abrir demo de autenticación"
+      >
+        <span className="auth-fab-icon">🔐</span>
+        <span className="auth-fab-label">Auth / Ley 25.326</span>
+      </button>
+
+      {showAuth && <ModalAuth onClose={() => setShowAuth(false)} />}
     </>
   );
 }

@@ -1,4 +1,4 @@
-export default function PaymentModal({ cart, totalPrice, onConfirm, onCancel }) {
+export default function PaymentModal({ totalPrice, onConfirm, onCancel }) {
     return (
         <div className="modal-overlay" id="payment-modal-overlay">
             <div className="modal" id="payment-modal">

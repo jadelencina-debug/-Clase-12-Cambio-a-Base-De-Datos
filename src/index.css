@@ -1,45 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg-color: #0d0b14;
-  --text-main: #e2dcf2;
-  --text-muted: #948baf;
-  --accent-color: #ff6b6b;
-  --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
+  /* Paleta viva, alegre y moderna */
+  --bg-main: #0d0822;
+  --bg-surface: rgba(26, 20, 56, 0.75);
+  --bg-surface-hover: rgba(38, 29, 82, 0.85);
 
-body {
-  margin: 0;
-  background-color: var(--bg-color);
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(255, 107, 107, 0.04), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(255, 142, 83, 0.04), transparent 25%);
-  color: var(--text-main);
-  font-family: var(--font-family);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+  --text-main: #ffffff;
+  --text-soft: #e2d9fc;
+  --text-muted: #a395cf;
 
-#root {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  box-sizing: border-box;
-}
+  /* Gradientes coloridos y enérgicos */
+  --grad-candy: linear-gradient(135deg, #ff007f 0%, #ff5e62 45%, #ffb300 100%);
+  --grad-sunset: linear-gradient(135deg, #f72585 0%, #7209b7 100%);
+  --grad-cyber: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+  --grad-neon: linear-gradient(135deg, #00f5d4 0%, #00bbf9 100%);
+  --grad-magic: linear-gradient(135deg, #9b5de5 0%, #f15bb5 100%);
+  --grad-lemonade: linear-gradient(135deg, #fee440 0%, #f15bb5 100%);
+  --grad-rainbow: linear-gradient(90deg, #ff007f, #fee440, #00f5d4, #00bbf9, #9b5de5, #ff007f);
 
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 700;
+  /* Colores de acento */
+  --accent-pink: #ff007f;
+  --accent-yellow: #fee440;
+  --accent-cyan: #00f5d4;
+  --accent-purple: #9b5de5;
+  --accent-orange: #ff5e62;
+
+  /* Bordes y sombras vibrantes */
+  --card-border: rgba(255, 255, 255, 0.12);
+  --card-border-hover: rgba(255, 0, 127, 0.45);
+  --glow-pink: 0 10px 30px -5px rgba(255, 0, 127, 0.4);
+  --glow-cyan: 0 10px 30px -5px rgba(0, 245, 212, 0.4);
+  --glow-purple: 0 10px 30px -5px rgba(155, 93, 229, 0.4);
+  --shadow-float: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+
+  --font-display: 'Fredoka', 'Outfit', sans-serif;
+  --font-body: 'Outfit', sans-serif;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(at 10% 15%, rgba(255, 0, 127, 0.2) 0px, transparent 40%),
+    radial-gradient(at 90% 10%, rgba(155, 93, 229, 0.25) 0px, transparent 45%),
+    radial-gradient(at 80% 85%, rgba(0, 245, 212, 0.18) 0px, transparent 40%),
+    radial-gradient(at 15% 90%, rgba(254, 228, 64, 0.15) 0px, transparent 35%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
 }
