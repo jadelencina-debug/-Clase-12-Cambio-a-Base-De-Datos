@@ -42,7 +42,6 @@ function App() {
       }
       return [...prev, { ...producto, cantidad: 1 }];
     });
-    setCartOpen(true);
   };
 
   const removeFromCart = (id) => {
