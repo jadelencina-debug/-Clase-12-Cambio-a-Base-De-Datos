@@ -1,0 +1,223 @@
+/* ── Overlay ──────────────────────────────────────────────── */
+.mis-pedidos-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 1rem;
+}
+
+/* ── Modal ────────────────────────────────────────────────── */
+.mis-pedidos-modal {
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
+    width: 100%;
+    max-width: 680px;
+    border-radius: 18px;
+    border: 1px solid rgba(148,163,184,0.15);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow: hidden;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.mp-header {
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid rgba(148,163,184,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), transparent);
+    flex-shrink: 0;
+}
+.mp-title { margin: 0; color: #f8fafc; font-size: 1.6rem; font-weight: 800; }
+.mp-subtitle { margin: 0.2rem 0 0; color: #94a3b8; font-size: 0.9rem; }
+
+.mp-header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+.btn-mis-datos {
+    background: rgba(99,102,241,0.2);
+    border: 1px solid rgba(99,102,241,0.4);
+    color: #a5b4fc;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.btn-mis-datos:hover { background: rgba(99,102,241,0.35); color: #c7d2fe; }
+
+.mp-close-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: #94a3b8;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+}
+.mp-close-btn:hover { background: rgba(239,68,68,0.2); color: #fca5a5; }
+
+/* ── Body ─────────────────────────────────────────────────── */
+.mp-body {
+    padding: 1.25rem 1.75rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+/* ── States ───────────────────────────────────────────────── */
+.mp-loading {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #94a3b8;
+}
+.spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(139,92,246,0.2);
+    border-top-color: #7c3aed;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mp-error {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.mp-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #64748b;
+}
+.mp-empty-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+.mp-empty p { margin: 0.25rem 0; font-size: 1rem; color: #94a3b8; }
+.mp-empty-sub { font-size: 0.85rem !important; color: #64748b !important; }
+
+/* ── Pedido Card ──────────────────────────────────────────── */
+.pedido-card {
+    background: rgba(30,41,59,0.7);
+    border: 1px solid rgba(148,163,184,0.12);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+.pedido-card:hover { border-color: rgba(139,92,246,0.3); }
+
+.pedido-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 1.25rem 0.75rem;
+    gap: 1rem;
+}
+
+.pedido-card-id { display: flex; flex-direction: column; gap: 0.25rem; }
+.pedido-num { font-size: 1rem; font-weight: 700; color: #e2e8f0; }
+.pedido-fecha { font-size: 0.8rem; color: #64748b; }
+
+.pedido-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
+.pedido-total { font-size: 1.15rem; font-weight: 800; color: #34d399; }
+
+.estado-pill {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ── Resumen / expand ─────────────────────────────────────── */
+.pedido-card-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.25rem 0.75rem;
+    border-top: 1px solid rgba(148,163,184,0.08);
+}
+.pedido-items-count { font-size: 0.85rem; color: #94a3b8; }
+.btn-expand {
+    background: none;
+    border: none;
+    color: #7c3aed;
+    font-size: 0.82rem;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 600;
+}
+.btn-expand:hover { color: #a78bfa; }
+
+/* ── Detalle ──────────────────────────────────────────────── */
+.pedido-detalle {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(148,163,184,0.08);
+    background: rgba(15,23,42,0.5);
+}
+.detalle-header {
+    font-size: 0.78rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+.detalle-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(148,163,184,0.06);
+}
+.detalle-item:last-child { border-bottom: none; }
+.detalle-cantidad { color: #94a3b8; }
+.detalle-precio { font-weight: 600; color: #e2e8f0; }
+
+/* ── Revocación ───────────────────────────────────────────── */
+.revocacion-zona {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(239,68,68,0.15);
+    background: rgba(239,68,68,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.revocacion-info { font-size: 0.8rem; color: #fca5a5; }
+.btn-revocar {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.35);
+    color: #fca5a5;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    align-self: flex-start;
+}
+.btn-revocar:hover:not(:disabled) { background: rgba(239,68,68,0.28); color: #fff; }
+.btn-revocar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.revocacion-exitosa {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(16,185,129,0.2);
+    background: rgba(16,185,129,0.08);
+    color: #34d399;
+    font-size: 0.85rem;
+}
