@@ -7,7 +7,8 @@
     align-items: center;
     justify-content: center;
     z-index: 10001;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
 }
 
 .mis-datos-modal {
@@ -19,8 +20,9 @@
     box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.2);
     display: flex;
     flex-direction: column;
-    max-height: 88vh;
+    max-height: 85vh;
     overflow: hidden;
+    margin: auto;
 }
 
 /* ── Header ───────────────────────────────────────────────── */
@@ -52,9 +54,24 @@
 .md-body {
     padding: 1.25rem 1.75rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    flex: 1;
+    min-height: 0;
+}
+
+.md-body::-webkit-scrollbar {
+    width: 8px;
+}
+.md-body::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 4px;
+}
+.md-body::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 4px;
 }
 
 .md-loading {
@@ -111,8 +128,31 @@
     font-size: 0.9rem;
 }
 .datos-fila:last-child { border-bottom: none; }
-.datos-label { color: #64748b; }
-.datos-value { color: #e2e8f0; font-weight: 500; text-align: right; }
+.datos-label { color: #94a3b8; font-weight: 500; flex-shrink: 0; }
+.datos-value { color: #e2e8f0; font-weight: 500; text-align: right; word-break: break-word; }
+
+/* ── Badge Rol ────────────────────────────────────────────── */
+.rol-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.rol-admin {
+    background: linear-gradient(135deg, rgba(234,179,8,0.2) 0%, rgba(168,85,247,0.25) 100%);
+    border: 1px solid rgba(234,179,8,0.5);
+    color: #fde047;
+    text-shadow: 0 0 10px rgba(234,179,8,0.4);
+}
+.rol-customer {
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.35);
+    color: #93c5fd;
+}
 
 /* ── Stats ────────────────────────────────────────────────── */
 .stats-grid {

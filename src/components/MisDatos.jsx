@@ -95,12 +95,22 @@ export default function MisDatos({ onClose, onCuentaEliminada }) {
                             <Seccion titulo="Información de cuenta" icono="🪪">
                                 <Fila label="Nombre" value={datos.perfil.nombre} />
                                 <Fila label="Email" value={datos.perfil.email} />
-                                <Fila label="Rol" value={datos.perfil.rol} />
+                                <Fila 
+                                    label="Rol de Usuario" 
+                                    value={
+                                        datos.perfil.rol === 'admin' ? (
+                                            <span className="rol-badge rol-admin">👑 Administradora (admin)</span>
+                                        ) : (
+                                            <span className="rol-badge rol-customer">👤 Cliente ({datos.perfil.rol || 'customer'})</span>
+                                        )
+                                    } 
+                                />
+                                <Fila label="Estado de cuenta" value={datos.perfil.activo ? '🟢 Activo' : '🔴 Inactivo'} />
                                 <Fila label="Aceptó tratamiento de datos"
                                       value={datos.perfil.acepto_tratamiento ? '✅ Sí' : '❌ No'} />
                                 <Fila label="Fecha de consentimiento"
                                       value={datos.perfil.fecha_consentimiento
-                                          ? new Date(datos.perfil.fecha_consentimiento).toLocaleDateString('es-AR')
+                                          ? new Date(datos.perfil.fecha_consentimiento).toLocaleString('es-AR')
                                           : null} />
                             </Seccion>
 

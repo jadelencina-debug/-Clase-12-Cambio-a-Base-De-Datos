@@ -107,7 +107,16 @@ export default function AuthScreen() {
                         </>
                     )}
                     {errorMsg && <div className={`auth-error ${errorMsg.includes('exitoso') ? 'success' : ''}`}>{errorMsg}</div>}
-                    <button type="submit" className="btn-primary" disabled={loading}>
+                    <button
+                        type="submit"
+                        className="btn-primary"
+                        disabled={loading || (!isLoginView && !aceptoTratamiento)}
+                        title={
+                            !isLoginView && !aceptoTratamiento
+                                ? 'Debés aceptar el tratamiento de datos (Ley 25.326) para registrarte'
+                                : undefined
+                        }
+                    >
                         {loading ? 'Cargando...' : (isLoginView ? 'Ingresar' : 'Crear Cuenta')}
                     </button>
                 </form>

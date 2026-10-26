@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-const API = 'http://localhost:8000';
+// URL relativa → pasa por el proxy de Vite o VITE_API_URL
+// Sin URLs hardcodeadas: si la API cambia, solo se toca la variable de entorno
+const API = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * ModalAuth
@@ -448,7 +450,7 @@ export default function ModalAuth({ onClose }) {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
           <span style={{ fontSize: 12, color: '#475569' }}>
-            🔗 API en <a href="http://localhost:8000/docs" target="_blank" rel="noreferrer" style={{ color: '#7c3aed' }}>localhost:8000/docs</a>
+            🔗 <a href={`${import.meta.env.VITE_API_URL || ''}/docs`} target="_blank" rel="noreferrer" style={{ color: '#7c3aed' }}>Documentación API (/docs)</a>
           </span>
           <span style={{ fontSize: 11, color: '#334155' }}>
             Ley 25.326 · JWT HS256 · bcrypt $2b$

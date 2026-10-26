@@ -1,6 +1,6 @@
 import { getProductImage } from '../utils/productImages';
 
-export default function ProductCard({ producto, addToCart, cart }) {
+export default function ProductCard({ producto, addToCart, cart, isAdmin, onEditProducto }) {
     const { nombre, precio_final, cuotas_cantidad, cuotas_valor, garantia_meses, stock } = producto;
     const inCart = cart?.find((item) => item.id === producto.id);
     const cantidadEnCarrito = inCart ? inCart.cantidad : 0;
@@ -23,6 +23,30 @@ export default function ProductCard({ producto, addToCart, cart }) {
                 <p className="garantia">Garantía: {garantia_meses} meses</p>
             )}
             <p className="stock-info">Stock: {stock - cantidadEnCarrito} disponibles</p>
+            {isAdmin && (
+                <button
+                    className="btn-admin-card-edit"
+                    onClick={() => onEditProducto && onEditProducto(producto)}
+                    style={{
+                        padding: '0.55rem 0.9rem',
+                        background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '10px',
+                        fontWeight: 700,
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        marginBottom: '0.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.4rem',
+                        boxShadow: '0 4px 12px rgba(168, 85, 247, 0.35)'
+                    }}
+                >
+                    ✏️ Editar Producto / Imagen
+                </button>
+            )}
             <button
                 className={`add-to-cart-btn ${sinStock ? 'add-to-cart-btn--disabled' : ''}`}
                 onClick={() => !sinStock && addToCart(producto)}

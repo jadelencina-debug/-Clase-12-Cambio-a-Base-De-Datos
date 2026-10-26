@@ -1,4 +1,4 @@
-const BASE_URL = '/api';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export const getProductos = async () => {
     try {
@@ -110,4 +110,57 @@ export const eliminarMiCuenta = async (token) => {
     if (response.status === 204) return true;
     const body = await response.json();
     throw new Error(body.detail || "Error al eliminar la cuenta");
+};
+
+// ── Servicios de Administración de Productos ──────────────────
+
+export const updateProducto = async (id, data, token) => {
+    const response = await fetch(`${BASE_URL}/productos/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.detail || "Error al actualizar producto");
+    return body;
+};
+
+export const createProducto = async (data, token) => {
+    const response = await fetch(`${BASE_URL}/productos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.detail || "Error al crear producto");
+    return body;
+};
+
+export const uploadProductoImagen = async (id, file, token) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch(`${BASE_URL}/productos/${id}/imagen`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData
+    });
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.detail || "Error al subir imagen");
+    return body;
+};
+
+export const deleteProducto = async (id, token) => {
+    const response = await fetch(`${BASE_URL}/productos/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    if (response.status === 204) return true;
+    const body = await response.json();
+    throw new Error(body.detail || "Error al eliminar producto");
 };

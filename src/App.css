@@ -919,7 +919,7 @@
 /* ── Botón flotante ── */
 .arrepentimiento-fab {
   position: fixed;
-  bottom: 2rem;
+  bottom: 13rem;
   left: 2rem;
   z-index: 900;
   display: flex;

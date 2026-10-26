@@ -8,7 +8,14 @@ export const PRODUCT_IMAGES = {
 
 export function getProductImage(producto) {
     if (!producto) return null;
-    if (producto.imagen) return producto.imagen;
+    const baseUrl = import.meta.env.VITE_API_URL || '';
+    const rawUrl = producto.imagen_url || producto.imagen;
+    if (rawUrl) {
+        if (rawUrl.startsWith('/uploads') && baseUrl) {
+            return `${baseUrl}${rawUrl}`;
+        }
+        return rawUrl;
+    }
     if (PRODUCT_IMAGES[producto.id]) return PRODUCT_IMAGES[producto.id];
     const n = (producto.nombre || '').toLowerCase();
     if (n.includes('hamburguesa')) return '/images/hamburguesa.png';
